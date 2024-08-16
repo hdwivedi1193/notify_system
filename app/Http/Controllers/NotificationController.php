@@ -19,7 +19,7 @@ class NotificationController extends Controller
         $this->authorize('adminAccess', User::class);
         // Fetch users with notifications switch on
 
-        $users = User::where('notification_switch', true)->where('user_type', "!=", config("site.user.admin"))->get();
+        $users = User::where('user_type', "!=", config("site.user.admin"))->get();
         return view('admin.create-notification', compact('users'));
     }
     public function store(Request $request)

@@ -30,7 +30,7 @@
                     <i class="bi bi-bell fs-3"></i>
                     @if(Auth::user()->unreadNotifications->count())
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            {{ Auth::user()->unreadNotifications->count() }}
+                            {{Auth::user()->notification_switch==false?0: Auth::user()->unreadNotifications->count() }}
                             <span class="visually-hidden">unread notifications</span>
                         </span>
                     @endif

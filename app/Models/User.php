@@ -61,7 +61,7 @@ class User extends Authenticatable
      */
     public function unreadNotifications()
     {
-        return $this->notifications()->where('is_read', 0)
+        return $this->notifications()->where('is_read', false)
             ->where('expiration', '>', now());
     }
 }
