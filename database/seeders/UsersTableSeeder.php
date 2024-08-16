@@ -19,15 +19,17 @@ class UsersTableSeeder extends Seeder
         // Create 10 individual users
         $faker = \Faker\Factory::create();
         $now = Carbon::now();
+        for ($i = 0; $i < 10; $i++) {
 
-        DB::table("users")->insert([
-            "name" => $faker->name,
-            "email" => $faker->unique()->safeEmail,
-            "password" => Hash::make("password"),
-            'user_type' => 'individual',
-            'created_at' => $now,
-            'updated_at' => $now,
-        ]);
+            DB::table("users")->insert([
+                "name" => $faker->name,
+                "email" => $faker->unique()->safeEmail,
+                "password" => Hash::make("password"),
+                'user_type' => 'individual',
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]);
+        }
 
         // Create 1 admin user
         DB::table('users')->insert([
