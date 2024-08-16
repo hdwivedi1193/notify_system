@@ -6,10 +6,10 @@
     <h1>Users</h1>
     <!-- Display Success Message -->
     @if(session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -25,7 +25,9 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>
-                        {{ $user->unreadNotificationsCount }}
+                        <!-- <a href="{{ route('userNotifications', $user->id) }}">
+                        </a> -->
+                        {{ $user->unreadNotifications->count() }}
 
                     </td>
                     <td>

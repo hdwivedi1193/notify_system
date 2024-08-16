@@ -25,13 +25,11 @@ class UserPolicy
     }
 
     // Determine if the authenticated user can impersonate another user
-    public function impersonate(User $authUser, User $user)
+    public function adminAccess(User $authUser)
     {
+        
         return $authUser->user_type === 'admin';
     }
 
-    public function post(User $user)
-    {
-        return $user->user_type === 'admin'; // Only admins can create notifications
-    }
+    
 }

@@ -53,6 +53,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Notification::class, 'user_notifications')
             ->withPivot('is_read')
+            ->withPivot('id')
             ->withTimestamps();
     }
     /**
@@ -60,7 +61,7 @@ class User extends Authenticatable
      */
     public function unreadNotifications()
     {
-        return $this->notifications()->where('is_read', false)
+        return $this->notifications()->where('is_read', 0)
             ->where('expiration', '>', now());
     }
 }

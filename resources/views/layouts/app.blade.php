@@ -26,11 +26,13 @@
                 <ul class="navbar-nav ms-auto">
                     @if(Auth::check())
                         <li class="nav-item">
-                            <a class="nav-link" href="{{auth()->user()->user_type=="admin"? route('admin.index'):"" }}">DashBoard</a>
+                            <a class="nav-link" href="{{auth()->user()->user_type=="admin"? route('admin.index'): route('individual.index') }}">DashBoard</a>
                         </li>
+                        @if(auth()->user()->user_type==config('site.user.admin'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{auth()->user()->user_type=="admin"? route('admin.notifications.create'):"" }}">Post Notification</a>
+                            <a class="nav-link" href="{{ route('admin.notifications.create')}}">Post Notification</a>
                         </li>
+                        @endif
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('settings.edit', Auth::user()->id) }}">Settings</a>
                         </li>
@@ -77,5 +79,9 @@
     </body>
     @yield("scripts")
     @yield('tel-script')
+    <script>
+        $('.alert-danger').delay(3000).fadeOut();
+        $('.alert-success').delay(3000).fadeOut();
+    </script>
 
 </html>

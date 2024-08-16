@@ -58,13 +58,22 @@
                     <button type="submit" class="btn btn-primary">Create Notification</button>
                 </div>
             </form>
+            @if ($errors->any())
+                <div class="alert alert-danger mt-3">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
         </div>
     </div>
 </div>
 
 @section('scripts')
 <script>
-    document.getElementById('target_type').addEventListener('change', function() {
+    document.getElementById('target_type').addEventListener('change', function () {
         document.getElementById('target_users_group').classList.toggle('d-none', this.value !== 'specific');
     });
 </script>

@@ -40,12 +40,17 @@ class Handler extends ExceptionHandler
         });
     }
 
-    public function render($request,Throwable $exception)
+    public function render($request, Throwable $exception)
     {
         // Handle AuthorizationException globally
         if ($exception instanceof AuthorizationException) {
-            return redirect()->back()->with('error', 'Not Authorized');
+            if (auth()->check()) {
+                return redirect()->route(auth()->user()->user_type . ".index")->with('error', 'You are not authorized to access the requested data');
+            }
+            return redirect()->route('login');
         }
+        return parent::render($request, $exception);
+
 
     }
 }

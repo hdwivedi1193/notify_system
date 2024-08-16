@@ -15,12 +15,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $users = User::withCount([
-            'notifications' => function ($query) {
-                $query->where('is_read', false)
-                    ->where('expiration', '>', now());
-            }
-        ])->where('user_type', '!=', config('site.user.admin'))->get();
+        $this->authorize('adminAccess', User::class);
+        $users = User::with("unreadNotifications")->where('user_type', '!=', config('site.user.admin'))->get();
 
         return view('admin.index', compact('users'));
     }
@@ -37,12 +33,12 @@ class AdminController extends Controller
 
     public function impersonate(User $user)
     {
-        $this->authorize('impersonate', $user);
+        $this->authorize('adminAccess', User::class);
         session()->put('original_user_id', Auth::id());
         session()->put('impersonate', $user->id);
         Auth::login($user);
 
-        return redirect()->route('settings.edit', ["user" => Auth::id()]);
+        return redirect()->route('individual.index');
     }
 
     public function stopImpersonate()
