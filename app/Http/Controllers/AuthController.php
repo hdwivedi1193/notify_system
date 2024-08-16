@@ -9,6 +9,14 @@ class AuthController extends Controller
 {
     public function showLoginForm()
     {
+        // Check if the user is already authenticated
+        if (auth()->check()) {
+            // Get the authenticated user
+            $user = auth()->user();
+
+            // Redirect based on user type (admin or individual)
+            return redirect()->route($user->user_type . '.index');
+        }
         return view('auth.login');
     }
 
@@ -25,7 +33,12 @@ class AuthController extends Controller
         // attempt to do the login
 
         if (Auth::attempt($credentials)) {
-            return redirect()->intended("home");
+            $request->session()->regenerate(); // to handle session fixation
+
+            $user = Auth::user();
+            return redirect()->route($user->user_type . '.index');
+
+
         }
         // validation not successful, send back to form
 
@@ -33,8 +46,11 @@ class AuthController extends Controller
 
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
+        $request->session()->invalidate(); // invalidate user session
+
+        $request->session()->regenerateToken(); // regenerate csrf token
         Auth::logout(); // logging out user
         return redirect()->route('login');
     }
