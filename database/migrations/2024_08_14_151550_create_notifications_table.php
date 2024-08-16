@@ -18,13 +18,10 @@ class CreateNotificationsTable extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); // Foreign key for users table
             $table->enum('type', ['marketing', 'invoices', 'system']);
             $table->string('text',255); // Short text field
             $table->timestamp('expiration')->nullable();
-            $table->boolean('is_read')->default(false);
-            $table->boolean('is_for_all')->default(false); // Indicates if notification is for all users
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Foreign key constraint
+            $table->enum('destination', ['all', 'specific'])->default("all");
 
             $table->timestamps();
         });
