@@ -1,64 +1,104 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# RIN2 Project
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Overview
 
-## About Laravel
+The RIN2 Project is a comprehensive user notification management system built with Laravel 8. It allows administrators to create, manage, and deliver notifications to users. Users can view, manage, and mark notifications as read. The project includes advanced features like user impersonation by admin, robust notification settings, and a search and filter functionality for notifications and users.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Admin Dashboard:**
+  - Manage users and their notifications.
+  - Create and post notifications to all users or specific users.
+  - Impersonate users to manage their accounts and notifications.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **User Dashboard:**
+  - View and manage notifications.
+  - Update account and notification settings, including toggling on-screen notifications.
+  - Real-time notification counter in user dashboard section.
+  - If notifications are switched off, the counter will be hidden from the user dashboard, but users/admin can still view unread notifications by clicking the notification icon.
 
-## Learning Laravel
+- **Authentication:**
+  - Secure login system with role-based access control.
+  - Redirects users to their respective dashboards upon login.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Search and Filters:**
+  - Search and filter notifications by type, target, and expiration.
+  - Search users by email and phone number.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Notifications:**
+  - Mark notifications as read.
+  - Admins can view notifications without marking them as read.
+  - Users can view their notifications and mark them as read
+  - Scheduled job handling for sending notifications to all users.
+  - All notification postings with the target type "all users" are managed through queued jobs to ensure efficient processing and delivery.
 
-## Laravel Sponsors
+### Prerequisites
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Ensure that you have the following installed on your local development machine:
 
-### Premium Partners
+- PHP 7.4 or higher
+- Composer
+- MySQL
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### Steps to Install and Run
 
-## Contributing
+## Installation
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Follow these steps to get the project up and running on your local machine.
 
-## Code of Conduct
+### 1. Clone the Repository
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+git clone https://github.com/hdwivedi1193/notify_system.git
+cd notify_system
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 2. Install Dependencies
 
-## License
+Install all the required packages using Composer:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+composer install
+
+
+### 3. Set Up Environment Variables
+
+
+Update the `.env` file with your database details:
+
+DB_DATABASE=notify_system
+DB_USERNAME=your_database_username
+DB_PASSWORD=your_database_password
+
+### 4. Setup Mysql DB
+Make sure the notify_system database exists in your MySQL server. You can create it manually through a MySQL client or use a command-line tool:
+
+CREATE DATABASE notify_system;
+
+### 5. Run Migrations and Seeders
+
+php artisan migrate
+php artisan db:seed --class=UsersTableSeeder
+
+### 6. Start the Queue Worker
+
+Run the following command in a separate terminal window or tab
+
+php artisan queue:work
+
+### 7. Serve the Application
+
+Start the local development server:
+php artisan serve
+
+### 8. Access the Application
+
+http://localhost:8000
+
+## Additional Information
+
+- **Notification Settings**: Users can toggle on-screen notifications on/off. If notifications are switched off, the counter will be hidden from the dashboard, but users can still view unread notifications by clicking the notification icon.
+- **User Roles**: The application supports different user types, including admin and regular users, with role-based access control.
+- **Authorization**: Authorization is implemented to ensure that only authorized users can perform certain actions, such as viewing or posting notifications.
+
+This `README.md` file covers all aspects of installation, configuration, and running the application, including setting up the database and running the queue worker.
+
+Happy Coding
