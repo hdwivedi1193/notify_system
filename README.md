@@ -98,6 +98,14 @@ php artisan serve
 
 http://localhost:8000
 
+### 9. Demo Admin Credentials
+
+For demo purposes, you can log in with the following admin credentials:
+
+Email: admin@example.com
+
+Password: password
+
 ## Additional Information
 
 - **Notification Settings**: Users can toggle on-screen notifications on/off. If notifications are switched off, the counter will be hidden from the dashboard, but users can still view unread notifications by clicking the notification icon.
