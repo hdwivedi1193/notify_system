@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title') - My Laravel App</title>
+    <title>@yield('title') - Notify App</title>
     <!-- intl-tel-input CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/css/intlTelInput.css"/>
 
@@ -17,7 +17,7 @@
     <!-- Header -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">My Laravel App</a>
+            <a class="navbar-brand" href="#">Notify App</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -68,7 +68,7 @@
     <!-- Footer -->
     <footer class="bg-light text-center text-lg-start mt-auto py-3">
         <div class="container text-center">
-            <span class="text-muted">&copy; 2024 My Laravel App. All rights reserved.</span>
+            <span class="text-muted">&copy; 2024 Notify App. All rights reserved.</span>
         </div>
     </footer>
     <!-- jQuery (if not already included) -->
