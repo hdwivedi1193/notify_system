@@ -50,6 +50,7 @@ Follow these steps to get the project up and running on your local machine.
 
 
 git clone https://github.com/hdwivedi1193/notify_system.git
+
 cd notify_system
 
 ### 2. Install Dependencies
@@ -65,7 +66,9 @@ composer install
 Update the `.env` file with your database details:
 
 DB_DATABASE=notify_system
+
 DB_USERNAME=your_database_username
+
 DB_PASSWORD=your_database_password
 
 ### 4. Setup Mysql DB
@@ -76,6 +79,7 @@ CREATE DATABASE notify_system;
 ### 5. Run Migrations and Seeders
 
 php artisan migrate
+
 php artisan db:seed --class=UsersTableSeeder
 
 ### 6. Start the Queue Worker
@@ -87,6 +91,7 @@ php artisan queue:work
 ### 7. Serve the Application
 
 Start the local development server:
+
 php artisan serve
 
 ### 8. Access the Application
@@ -96,7 +101,9 @@ http://localhost:8000
 ## Additional Information
 
 - **Notification Settings**: Users can toggle on-screen notifications on/off. If notifications are switched off, the counter will be hidden from the dashboard, but users can still view unread notifications by clicking the notification icon.
+
 - **User Roles**: The application supports different user types, including admin and regular users, with role-based access control.
+
 - **Authorization**: Authorization is implemented to ensure that only authorized users can perform certain actions, such as viewing or posting notifications.
 
 This `README.md` file covers all aspects of installation, configuration, and running the application, including setting up the database and running the queue worker.
