@@ -36,7 +36,7 @@ class SendNotificationJob implements ShouldQueue
     public function handle()
     {
         //
-        $users = User::where('notification_switch', true)->where('user_type',"!=",config("site.user.admin"))->get();
+        $users = User::where('user_type',"!=",config("site.user.admin"))->get();
         // This associates the notification with the user
         foreach ($users as $user) {
             $user->notifications()->attach($this->notification->id);

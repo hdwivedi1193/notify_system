@@ -1,4 +1,3 @@
-<!-- resources/views/admin/create-notification.blade.php -->
 @extends('layouts.app')
 
 @section('content')
@@ -75,6 +74,12 @@
 <script>
     document.getElementById('target_type').addEventListener('change', function () {
         document.getElementById('target_users_group').classList.toggle('d-none', this.value !== 'specific');
+        if(this.value=="specific"){
+            $("#target_users").attr("required","required");
+        }else{
+            $("#target_users").removeAttr("required");
+
+        }
     });
 </script>
 @endsection

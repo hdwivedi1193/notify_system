@@ -32,6 +32,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.notifications.create')}}">Post Notification</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.notifications.list')}}">All Notifications</a>
+                        </li>
                         @endif
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('settings.edit', Auth::user()->id) }}">Settings</a>

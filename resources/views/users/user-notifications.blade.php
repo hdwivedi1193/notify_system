@@ -1,4 +1,3 @@
-<!-- resources/views/admin/view-user-notifications.blade.php -->
 
 @extends('layouts.app')
 

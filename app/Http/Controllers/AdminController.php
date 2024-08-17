@@ -15,7 +15,9 @@ class AdminController extends Controller
      */
     public function index()
     {
+        // Check if the current user has permission to access admin dashboard.
         $this->authorize('adminAccess', User::class);
+        // Retrieve all users who are not admins, eager loading their unread notifications to minimize database queries.
         $users = User::with("unreadNotifications")->where('user_type', '!=', config('site.user.admin'))->get();
 
         return view('admin.index', compact('users'));
@@ -33,35 +35,47 @@ class AdminController extends Controller
 
     public function impersonate(User $user)
     {
+        // Check if the current user has permission to impersonate the target user.
         $this->authorize('adminAccess', User::class);
+        // Store the original user ID in the session
+
         session()->put('original_user_id', Auth::id());
+        // Store the ID of the user being impersonated in the session.
+
         session()->put('impersonate', $user->id);
+        // Log in as the specified user.
+
         Auth::login($user);
 
         return redirect()->route('individual.index');
     }
+    /**
+     * Stop impersonating and revert to the original user.
+     *
+     * This method ends the impersonation session and logs the admin
+     * back in as the original user. It retrieves the original user ID
+     * from the session, performs the login. On success, it redirects to the admin dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
     public function stopImpersonate()
     {
+        // Remove the impersonation session.
+
         session()->forget('impersonate');
         $originalUserId = session()->get('original_user_id');
+        // Find the original user based on the stored ID.
+
         $originalUser = User::findOrFail($originalUserId);
         if ($originalUser && $originalUser->user_type == 'admin') {
             Auth::logout();
+            // Log in as the original user(admin).
+
             $user = Auth::loginUsingId($originalUser->id);
             return redirect()->route($user->user_type . '.index');
         }
-        return back() - with("error", "Oops!! Unable to impersonate. Please try again");
+        return redirect()->back()->with("error", "Oops!! Unable to impersonate. Please try again");
 
     }
-
-
-
-
-
-
-
-
-
-
 }

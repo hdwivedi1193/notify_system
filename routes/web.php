@@ -31,6 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('impersonate/{user}', [AdminController::class, 'impersonate'])->name('admin.impersonate');    // Route to impersonate user
     Route::get('stop-impersonate', [AdminController::class, 'stopImpersonate'])->name('admin.stopImpersonate');
     Route::get('notifications', [NotificationController::class, 'create'])->name('admin.notifications.create');
+    Route::get('notifications/list', [NotificationController::class, 'list'])->name('admin.notifications.list');
     Route::post("notifications",[NotificationController::class,'store'])->name('admin.notifications.store');   
 
     });
