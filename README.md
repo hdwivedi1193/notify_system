@@ -137,6 +137,10 @@ Password: password
 
 - **Authorization**: Authorization is implemented to ensure that only authorized users can perform certain actions, such as viewing or posting notifications.
 
+- **Phone Validation**: The project uses the Propaganistas Laravel Phone package for phone number validation.
+
+- **Search Criteria**: For search functionality, the project utilizes Beathon package, a minimal interface for the criteria pattern.
+
 This `README.md` file covers all aspects of installation, configuration, and running the application, including setting up the database and running the queue worker.
 
 Happy Coding
