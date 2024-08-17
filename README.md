@@ -11,26 +11,51 @@ The RIN2 Project is a comprehensive user notification management system built wi
   - Create and post notifications to all users or specific users.
   - Impersonate users to manage their accounts and notifications.
 
+
+      ![Admin Dashboard](https://i.ibb.co/mzRwcDd/Screenshot-1.png)
+
+
+      ![Post Notifications](https://i.ibb.co/Pc33pJ7/Screenshot-3.png)
+
+
+
+
+  
+
 - **User Dashboard:**
   - View and manage notifications.
   - Update account and notification settings, including toggling on-screen notifications.
   - Real-time notification counter in user dashboard section.
   - If notifications are switched off, the counter will be hidden from the user dashboard, but users/admin can still view unread notifications by clicking the notification icon.
 
+    ![User Dashboard](https://i.ibb.co/tmhkVw9/Screenshot-5.png)
+
+    ![User Settings](https://i.ibb.co/Jvk9Srm/Screenshot-6.png)
+
+    
+
 - **Authentication:**
   - Secure login system with role-based access control.
   - Redirects users to their respective dashboards upon login.
+  
+    ![Login](https://i.ibb.co/syYQdwf/Screenshot.png)
+
 
 - **Search and Filters:**
   - Search and filter notifications by type, target, and expiration.
   - Search users by email and phone number.
 
+    ![Notifications List](https://i.ibb.co/qpyG2mC/Screenshot-4.png)
+
+
 - **Notifications:**
-  - Mark notifications as read.
   - Admins can view notifications without marking them as read.
   - Users can view their notifications and mark them as read
   - Scheduled job handling for sending notifications to all users.
   - All notification postings with the target type "all users" are managed through queued jobs to ensure efficient processing and delivery.
+
+      ![User Notifications](https://i.ibb.co/n3tnXNF/Screenshot-7.png)
+
 
 ### Prerequisites
 
