@@ -135,8 +135,6 @@ Password: password
 
 - **Notification Settings**: Users can toggle on-screen notifications on/off. If notifications are switched off, the counter will be hidden from the dashboard, but users can still view unread notifications by clicking the notification icon.
 
-- **User Roles**: The application supports different user types, including admin and regular users, with role-based access control.
-
 - **Authorization**: Authorization is implemented to ensure that only authorized users can perform certain actions, such as viewing or posting notifications.
 
 This `README.md` file covers all aspects of installation, configuration, and running the application, including setting up the database and running the queue worker.
