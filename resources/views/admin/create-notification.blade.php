@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Post Notification')
 
 @section('content')
 <div class="container mt-4">
@@ -19,9 +20,9 @@
                 <div class="form-group mb-3">
                     <label for="type" class="form-label">Type</label>
                     <select id="type" name="type" class="form-select" required>
-                        <option value="marketing">Marketing</option>
-                        <option value="invoices">Invoices</option>
-                        <option value="system">System</option>
+                        <option value="marketing" {{ old('type') == 'marketing' ? 'selected' : ''}}>Marketing</option>
+                        <option value="invoices" {{ old('type') == 'invoices' ? 'selected' : ''}}>Invoices</option>
+                        <option value="system" {{ old('type') == 'system' ? 'selected' : ''}}>System</option>
                     </select>
                 </div>
 
@@ -32,7 +33,7 @@
 
                 <div class="form-group mb-3">
                     <label for="expiration" class="form-label">Expiration</label>
-                    <input id="expiration" name="expiration" type="date" class="form-control" required>
+                    <input id="expiration" name="expiration" type="date" class="form-control" value="{{old("expiration")}}" required min="{{date("Y-m-d")}}">
                 </div>
 
                 <div class="form-group mb-3">

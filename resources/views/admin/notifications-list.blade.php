@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Notifications List')
 
 @section('content')
 <div class="container">
@@ -11,9 +12,9 @@
                 <label for="type">Type</label>
                 <select id="type" name="type" class="form-control">
                     <option value="">All</option>
-                    <option value="marketing" {{ request('type') == 'marketing' ? 'selected' : ''}} >Marketing</option>
-                    <option value="invoices" {{ request('type') == 'invoices' ? 'selected' : ''}} >Invoices</option>
-                    <option value="system" {{ request('type') == 'system' ? 'selected' : ''}} >System</option>
+                    <option value="marketing" {{ request('type') == 'marketing' ? 'selected' : ''}}>Marketing</option>
+                    <option value="invoices" {{ request('type') == 'invoices' ? 'selected' : ''}}>Invoices</option>
+                    <option value="system" {{ request('type') == 'system' ? 'selected' : ''}}>System</option>
                 </select>
             </div>
 
@@ -22,13 +23,15 @@
                 <select id="target" name="target" class="form-control">
                     <option value="">All</option>
                     <option value="all" {{ request('target') == 'all' ? 'selected' : '' }}>All Users</option>
-                    <option value="specific" {{ request('target') == 'specific' ? 'selected' : ''}}>Specific Users</option>
+                    <option value="specific" {{ request('target') == 'specific' ? 'selected' : ''}}>Specific Users
+                    </option>
                 </select>
             </div>
 
             <div class="col-md-3">
                 <label for="expiration">Expiration</label>
-                <input id="expiration" name="expiration" type="date" class="form-control" value="{{ request('expiration') }}">
+                <input id="expiration" name="expiration" type="date" class="form-control"
+                    value="{{ request('expiration') }}">
             </div>
 
             <div class="col-md-3 d-flex align-items-end">
@@ -52,7 +55,8 @@
                 <tr>
                     <td>{{ $notification->type }}</td>
                     <td>{{ $notification->text }}</td>
-                    <td>{{ $notification->expiration ? \Carbon\Carbon::parse($notification->expiration)->format('Y-m-d') : 'No Expiration' }}</td>
+                    <td>{{ $notification->expiration ? \Carbon\Carbon::parse($notification->expiration)->format('Y-m-d') : 'No Expiration' }}
+                    </td>
                     <td>
                         @if ($notification->destination == 'all')
                             All Users
@@ -66,6 +70,11 @@
                     </td>
                 </tr>
             @endforeach
+            @empty($notifications)
+                <tr>
+                    <td colspan="4" class="text-center">No notifications found.</td>
+                </tr>
+            @endempty
         </tbody>
     </table>
 

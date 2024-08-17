@@ -10,6 +10,19 @@
             {{ session('error') }}
         </div>
     @endif
+    <!-- Filter Section -->
+    <form action="{{ route('admin.index') }}" method="GET" class="mb-4">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="emaail">Email</label>
+                <input id="email" name="email" type="email" class="form-control" value="{{ request('email') }}" placeholder="Search User By Email">
+            </div>
+
+            <div class="col-md-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
     <table class="table table-bordered">
         <thead>
             <tr>

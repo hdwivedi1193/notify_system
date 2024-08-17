@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Criteria\NotificationSearch;
 use App\Jobs\SendNotificationJob;
 use App\Models\Notification;
 use App\Models\User;
@@ -29,7 +30,7 @@ class NotificationController extends Controller
         // Validate the request data
         $this->validate($request, [
             'type' => 'required|in:marketing,invoices,system',
-            'short_text' => 'required|string|max:255',
+            'short_text' => 'required|string|max:50',
             'expiration' => 'required|date',
             'target_type' => 'required|in:all,specific',
             'target_users.*' => 'exists:users,id' // Ensure each target user ID exists in the users table.
@@ -97,18 +98,18 @@ class NotificationController extends Controller
         // Retrieve all notifications, eager loading the associated users and ordering them by creation date
 
         $notifications = Notification::with("users")->orderBy("created_at", "desc");
-        // Apply a filter based on the notification search request if provided in the request
+        // Apply a filter based on the notification search if provided in the request
 
         if ($request->has('type') && $request->type) {
-            (new search('type', $request->type))->apply($notifications);
+            (new NotificationSearch('type', $request->type))->apply($notifications);
         }
 
         if ($request->has('target') && $request->target) {
-            (new search('destination', $request->target))->apply($notifications);
+            (new NotificationSearch('destination', $request->target))->apply($notifications);
         }
 
         if ($request->has('expiration') && $request->expiration) {
-            (new search('expiration', $request->expiration))->apply($notifications);
+            (new NotificationSearch('expiration', $request->expiration))->apply($notifications);
         }
         // Paginate the filtered notifications, showing 10 per page
 

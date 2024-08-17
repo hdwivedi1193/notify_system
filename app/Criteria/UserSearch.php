@@ -2,7 +2,8 @@
 namespace App\Criteria;
 
 use Baethon\LaravelCriteria\CriteriaInterface;
-class Search implements CriteriaInterface
+use Carbon\Carbon;
+class UserSearch implements CriteriaInterface
 {
     private $field;
 
@@ -17,5 +18,6 @@ class Search implements CriteriaInterface
     public function apply($query)
     {
         $query->where($this->field, $this->value);
+
     }
 }

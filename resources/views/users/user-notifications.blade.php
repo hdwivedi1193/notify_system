@@ -1,5 +1,6 @@
 
 @extends('layouts.app')
+@section('title', 'Individual Notifications')
 
 @section('content')
 <div class="container mt-4">

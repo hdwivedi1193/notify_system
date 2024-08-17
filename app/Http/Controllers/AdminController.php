@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Criteria\UserSearch;
 use App\Models\User;
 
 use Auth;
@@ -13,12 +14,20 @@ class AdminController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
         // Check if the current user has permission to access admin dashboard.
         $this->authorize('adminAccess', User::class);
+
         // Retrieve all users who are not admins, eager loading their unread notifications to minimize database queries.
-        $users = User::with("unreadNotifications")->where('user_type', '!=', config('site.user.admin'))->get();
+
+        $users = User::with("unreadNotifications")->where('user_type', '!=', config('site.user.admin'));
+        // Apply a filter based on the notification search if provided in the request
+
+        if ($request->has('email') && $request->email) {
+            (new UserSearch('email', trim($request->email)))->apply($users);
+        }
+        $users = $users->get();
 
         return view('admin.index', compact('users'));
     }
