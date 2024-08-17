@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Route;
 // Authentication Routes
 Route::get('/', [AuthController::class,"showLoginForm"])->name('login');
 Route::post('/', [AuthController::class,"login"]);
-Route::post('logout', [AuthController::class,"logout"])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -40,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('users/{user}/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
     Route::get('settings/{user}', [SettingController::class, 'edit'])->name('settings.edit');    // Route to edit the settings
     Route::put('settings/{user}', [SettingController::class, 'update'])->name('settings.update');    // Route to update the settings
+    Route::post('logout', [AuthController::class,"logout"])->name('logout'); // Logout user
 
     
 });
